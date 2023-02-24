@@ -9,7 +9,7 @@ document.querySelectorAll(".dropdown__simplebar").forEach((dropdown) => {
   });
 });
 
-const btns = document.querySelectorAll(".menu__btn");
+const btns = document.querySelectorAll(".header__btn");
 const dropdowns = document.querySelectorAll(".dropdown");
 const activeClassdropdowns = "dropdown__active";
 const activeClassbtns = "btn__active";
@@ -74,10 +74,14 @@ btns.forEach((item) => {
 
 
 
-// СТРЕЛКА ДРОПДАУН--------------------------------------------------------
-// document.querySelector(".menu__arrow").addEventListener("click", function (e) {
-//   this.classList.toggle("active");
-// });
+// СТРЕЛКА ДРОПДАУН------------------------------------------------------
+
+var arrow = document.querySelectorAll(".header__arrow");
+for (var i = 0; i < arrow.length; i++) {
+  arrow[i].onclick = function(){
+    this.classList.toggle("header__arrow--active");
+  };
+}
 
 // СВАЙПЕР-HERO--------------------------------
 
@@ -109,13 +113,16 @@ cancelButton.addEventListener("click", () => {
 let burger = document.querySelector(".burger");
 let menu = document.querySelector(".header__nav");
 let menuLinks = menu.querySelectorAll(".nav__link");
+let menuenter = menu.querySelector(".header__enter-link");
 
 burger.addEventListener("click", function () {
   burger.classList.toggle("burger--activ");
 
+
   menu.classList.toggle("header__nav--activ");
 
   document.body.classList.toggle("stop-scroll");
+
 });
 
 menuLinks.forEach(function (el) {
@@ -156,12 +163,16 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 
     breakpoints: {
-      441: {
+      501: {
         slidesPerView: 2,
-        spaceBetween: 30,
+        spaceBetween: 34,
+      },
+      971: {
+        slidesPerView:2,
+        spaceBetween:30
       },
 
-      1200: {
+      1281: {
         slidesPerView: 3,
         spaceBetween: 50,
       },
@@ -285,15 +296,17 @@ const shwiper = new Swiper(".projects__swiper", {
   slidesPerView: 1,
   spaceBetween: 50,
   breakpoints: {
-    575: {
+
+    611: {
       slidesPerView: 2,
       spaceBetween: 34,
     },
-    769: {
+
+    971: {
       slidesPerView: 2,
       spaceBetween: 50,
     },
-    1025: {
+    1281: {
       slidesPerView: 3,
       spaceBetween: 50,
     },
@@ -368,8 +381,9 @@ const validation = new JustValidate("#form");
 validation
 .addField("#name", [
   {
-    rule: "minLength",
-    value: 2,
+    rule:'required',
+    // rule: "minLength",
+      value: 2,
     errorMessage: "Недопустимый формат",
   },
   {
@@ -380,6 +394,7 @@ validation
 .addField('#tel', [
 
   {
+    required:true,
     rule:'required',
     errorMessage: 'Вы не ввели телефон',
   },
@@ -389,8 +404,11 @@ validation
       const phone = selector.inputmask.unmaskedvalue()
       return !!Number (phone) && phone.length === 10;
     },
-    colorWrong:'blue',
+    colorWrong:'#D11616',
     errorMessage:'Телефон не корректный!',
   },
+
 ]);
+
+
 
